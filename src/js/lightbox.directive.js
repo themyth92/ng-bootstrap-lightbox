@@ -18,29 +18,30 @@
 			  replace 	  : true,
 			  scope       : false,
 			  template    : '<div id="lightbox" class="lightbox" ng-click = "close($event)">'+
-								'<div class="lb-outerContainer transition">'+
-									'<div class="lb-container" style = "padding:4px">'+
-										'<img ng-src = "{{content.src}}" class="lb-image animation fadeIn" ng-show = "!ui.showReloader">'+
-										'<div class="lb-nav" ng-show = "!ui.showReloader && ui.showArrowNav">'+
-											'<a class="lb-prev" href="" ng-click = "prevImage()"></a>'+
-											'<a class="lb-next" href="" ng-click = "nextImage()"></a>'+
-										'</div>'+
-										'<div class="lb-loader" ng-show = "ui.showReloader">'+
-											'<a class="lb-cancel"></a>'+
-										'</div>'+
-									'</div>'+
-								'</div>'+
-								'<div class="lb-dataContainer" ng-show = "!ui.showReloader">'+
-									'<div class="lb-data">'+
-										'<div class="lb-details"><span class="lb-caption" style="display: inline;" ng-bind = "content.caption"></span>'+
-													            '<span class="lb-number" ng-bind = "content.pageNumber"></span>'+
-										'</div>'+
-										'<div class="lb-closeContainer">'+
-											'<a class="lb-close" ng-click="close($event)"></a>'+
-										'</div>'+
-									'</div>'+
-								'</div>'+
-							'</div>',	
+								        '<div class="lb-outerContainer transition">'+
+								  	      '<div class="lb-container" style = "padding:4px">'+
+										         '<img ng-src = "{{content.src}}" class="lb-image animation fadeIn" ng-show = "!ui.showReloader">'+
+										         '<div class="lb-nav" ng-show = "!ui.showReloader && ui.showArrowNav">'+
+											           '<a class="lb-prev" href="" ng-click = "prevImage()" ng-swipe-left  = "prevImage()"></a>'+
+											           '<a class="lb-next" href="" ng-click = "nextImage()" ng-swipe-right = "nextImage()"></a>'+
+										          '</div>'+
+										        '<div class="lb-loader" ng-show = "ui.showReloader">'+
+											        '<a class="lb-cancel"></a>'+
+										        '</div>'+
+									       '</div>'+
+        								'</div>'+
+        								'<div class="lb-dataContainer" ng-show = "!ui.showReloader">'+
+        									'<div class="lb-data">'+
+        										'<div class="lb-details"><span class="lb-caption" style="display: inline;" ng-bind = "content.caption"></span>'+
+        													            '<span class="lb-number" ng-bind = "content.pageNumber"></span>'+
+        										'</div>'+
+        										'<div class="lb-closeContainer">'+
+        											'<a class="lb-close" ng-click="close($event)"></a>'+
+        										'</div>'+
+        									'</div>'+
+        								'</div>'+
+        							'</div>',
+
 			link : function(scope, elem, attrs){
 
 				/*=========================================================================
@@ -173,7 +174,6 @@
 
 					//unbind all the event
 					_this.element.$image.unbind('load');
-
 					_this.modalInstance.close();
 				}
 
@@ -636,8 +636,8 @@
 					//target has one these classes
 					if(angular.element($event.target).hasClass('lightbox') ||
 					   angular.element($event.target).hasClass('lb-loader') ||
-					   angular.element($event.target).hasClass('lb-close')){
-						end();
+					    angular.element($event.target).hasClass('lb-close')) {
+						  end();
 					}	
 				};
 

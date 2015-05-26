@@ -6,11 +6,11 @@ angular
 
 			var _this = this;
 			var options            = {
-				fitImageInViewPort 	 			: true,
-				positionFromTop      			: 20,  
-			    showImageNumberLabel 			: true,
-			    alwaysShowNavOnTouchDevices 	: false,
-			    wrapAround                      : true
+			 	fitImageInViewPort 	 			   : true,
+				positionFromTop      			   : 20,  
+			  showImageNumberLabel 			   : true,
+			  alwaysShowNavOnTouchDevices  : false,
+			  wrapAround                   : true
 			};
 
 			function init(){

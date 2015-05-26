@@ -1,32 +1,42 @@
 (function(angular){
 
+
+  //TODO : 1. Add ngTouch
+  //       2. Add more options : removeNavOnTouchDevice
+  //                           : disableAnimation
+  //                           : lightboxTemplate
+  //       3. Fix some options does not work
 	'use strict';
 
 	angular
 	.module('ngBoostrapLightbox')
 	.provider('lightbox', function LightboxProvider(){
 
-		var _this 				= this;
+		var _this 				      = this;
 		_this._lightbox        	= {
-			options : {
+		  
+      options : {
 
-				fadeDuration 					: 0.7,
-				resizeDuration 					: 0.5,
-				fitImageInViewPort				: false,
-				positionFromTop     			: 50,
-				showImageNumberLabel 			: false,
-				alwaysShowNavOnTouchDevices 	: false,
-				wrapAround 						: false,
-				templateUrl                		: 'src/partials/modal.tpl.html',
-				windowTemplateUrl               : 'src/partials/window.tpl.html'
-			},
-			modalInstance   : null,
+				fadeDuration 					      : 0.7,
+				resizeDuration 					    : 0.5,
+				fitImageInViewPort				  : false,
+				positionFromTop     			  : 50,
+				showImageNumberLabel 			  : false,
+				alwaysShowNavOnTouchDevices : false,
+				wrapAround 						      : false,
+				templateUrl                	: 'src/partials/modal.tpl.html',
+				windowTemplateUrl           : 'src/partials/window.tpl.html'
+		  },
+
 			modalController : function($scope, $modalInstance, album, currentImageIndex, options){
 
-				$scope.album 				= album;
-				$scope.currentImageIndex 	= currentImageIndex;
-				$scope.options  			= options;
-				$scope.modalInstance   		= $modalInstance;
+				$scope.album 				     = album;
+				$scope.currentImageIndex = currentImageIndex;
+				$scope.options  			   = options;
+
+        //store the modal instance so later we can remove the modal
+        //from bootstrap directive
+				$scope.modalInstance   	 = $modalInstance;
 			}
 		};
 
@@ -58,18 +68,19 @@
 					
 					//open bootstrap model
 					_this._lightbox.modalInstance = $modal.open({
-						templateUrl 		: _this._lightbox.options.templateUrl,
+
+						templateUrl 		    : _this._lightbox.options.templateUrl,
 						windowTemplateUrl 	: _this._lightbox.options.windowTemplateUrl,
 						controller          : ['$scope', '$modalInstance', 'album', 'currentImageIndex', 'options',
-											   _this._lightbox.modalController],
+											             _this._lightbox.modalController],
 						resolve             : {
-							album 			: function(){
+							album 			      : function(){
 								return album;
 							},
-							currentImageIndex 	: function(){
+							currentImageIndex : function(){
 								return curIndex;
-							},
-							options : function(){
+							},       
+							options           : function(){
 								return newOptions;
 							}
 						}
