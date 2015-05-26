@@ -1,0 +1,25 @@
+{
+  "name": "ImageSlider",
+  "version": "0.0.1",
+  "authors": [
+    "themyth92 <themyth92@gmail.com>"
+  ],
+  "description": "The image slider directive using purely angularjs and css3 animation. The project based on Lightbox2 by Lokesh Dhakar.",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "ImageSlider",
+    "directive",
+    "lightbox2"
+  ],
+  "license": "MIT",
+  "homepage": "themyth92.com/projects/imageslider.html",
+  "dependencies": {
+    "angular": "~1.2.20",
+    "angular-touch": "~1.2.20",
+    "ngDialog": "~0.2.3",
+    "angular-bootstrap": "~0.11.0"
+  },
+  "ignore": {}
+}
