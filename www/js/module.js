@@ -6,7 +6,7 @@ angular
 
 			var _this = this;
 			var options            = {
-        fadeDuration                 : 0.7,
+        fadeDuration                 : 5,
         resizeDuration               : 0.5,
 			 	fitImageInViewPort 	 			   : true,
 				positionFromTop      			   : 20,  
