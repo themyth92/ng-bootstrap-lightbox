@@ -489,7 +489,7 @@
         }
 
         function albumLabel(){
-
+          
           //due to {_this.currentImageIndex} is set from 0 to {_this.album.length} - 1
           return 'Image ' + Number(_this.currentImageIndex + 1) + " of " + _this.album.length; 
         }
