@@ -116,6 +116,23 @@ showImageNumberLabel | **false** | Determine whether to show the image number to
 alwaysShowNavOnTouchDevices | **false** | Determine whether to show `left/right` arrow to user on Touch devices.
 wrapAround | **false** | Determine whether to move to the start of the album when user reaches the end of album and vice versa. Set it to **true** to enable this feature.
 
+###Touch support
+
+Added `ngTouch` support.
+
+1. Include `ngTouch` scripts :
+
+ ```html
+ <script src = 'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-touch.js'></script>
+ ```
+ 
+2. Inject `ngTouch` as your module dependancy
+ ```js
+ angular.module('app', ['ngBootstrapLightbox', 'ngTouch']);
+ ```
+
+You can now swipe left or right on your mobile devices. 
+
 ##License
 
 MIT
