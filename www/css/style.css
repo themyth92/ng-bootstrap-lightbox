@@ -1,14 +1,3 @@
-@-webkit-keyframes shine {
-	100% {
-		left: 125%;
-	}
-}
-@keyframes shine {
-	100% {
-		left: 125%;
-	}
-}
-
 .img-row{
 	display: inline-block;
 }
