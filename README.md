@@ -47,9 +47,8 @@ Markup :
 ```html
 <div ng-controller="Ctrl as Ctrl">
   <div ng-repeat="image in Ctrl.album">
-      <img ng-src="{{image.thumb}}" ng-click = "Ctrl.run($index)"/>
-        </div>
-    </div>
+   <img ng-src="{{image.thumb}}" ng-click = "Ctrl.run($index)"/>
+  </div>
 </div>
 ```
 
@@ -65,7 +64,7 @@ angular
     //list available lightbox default options
     this.options = {
       fadeDuration : 0.7,
-          resizeDuration : 0.5,
+      resizeDuration : 0.5,
       fitImageInViewPort : false,
       positionFromTop : 50,  
       showImageNumberLabel : false,
@@ -100,6 +99,7 @@ angular
 Each `object` of `album` array inside controller may contains 3 properties :
 
 Properties | Requirement | Description
+----------|-------------|------------
 src | Required | The source image to your thumbnail that you want to with use lightbox when user click on `thumbnail` image
 caption | Optional | Your caption corresponding with your image 
 thumb | Optional | Source of your thumbnail. You can use whatever properties your like, just to make sure that your `controller` understand that `properties`.
@@ -107,6 +107,7 @@ thumb | Optional | Source of your thumbnail. You can use whatever properties you
 ###Lightbox options
 
 Properties | Default | Description
+-----------|---------|------------
 fadeDuration | **0.7** seconds | *duration* starting when the **src** image is **loaded** to **fully appear** onto screen.
 resizeDuration | **0.5** seconds | *duration* starting when Lightbox container  **change** its dimension from a *default/previous image* to the *current image* when the *current image* is **loaded**.
 fitImageInViewPort | **false** | Determine whether lightbox will use the natural image *width/height*  or change the image *width/height* to fit the view of current window. Change this option to **true** to prevent problem when image too big compare to browser windows.
