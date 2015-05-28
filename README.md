@@ -42,7 +42,7 @@ angular.module('app', ['ngBoostrapLightbox']);
 
 ## Basic example : 
 
-Markup :
+###Markup :
 
 ```html
 <div ng-controller="Ctrl as Ctrl">
@@ -52,7 +52,7 @@ Markup :
 </div>
 ```
 
-Controller : 
+###Controller : 
 
 ```js
 angular
