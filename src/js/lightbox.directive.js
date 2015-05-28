@@ -18,7 +18,7 @@
         replace     : true,
         scope       : false,
         template    : '<div id="lightbox" class="lightbox" ng-click = "close($event)">'+
-                        '<div class="lb-outerContainer transition">'+
+                        '<div class="lb-outerContainer transition" ng-swipe-left = "prevImage()" ng-swipe-right = "nextImage()">'+
                           '<div class="lb-container" style = "padding:4px">'+
                              '<img ng-src = "{{content.src}}" class="lb-image animation fadeIn" ng-show = "!ui.showReloader">'+
                              '<div class="lb-nav" ng-show = "ui.showArrowNav">'+

@@ -1,9 +1,9 @@
 (function(angular){
 
-  //TODO : 1. Add ngTouch
-  //       2. Add more options : removeNavOnTouchDevice
-  //                           : disableAnimation
-  //       3. Fix some options does not work 
+  //Todo : Add ngTouch
+  //     : Set text default for image label
+  //     : Dynamic update src/details, delete src, add new src/details
+  //     : Promise when close lightbox
   'use strict';
 
   angular
@@ -22,6 +22,8 @@
         showImageNumberLabel        : false,
         alwaysShowNavOnTouchDevices : false,
         wrapAround                  : false,
+
+        //should not change it for now
         templateUrl                 : 'src/partials/modal.tpl.html',
         windowTemplateUrl           : 'src/partials/window.tpl.html'
       },

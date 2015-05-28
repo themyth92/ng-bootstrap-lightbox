@@ -1,5 +1,5 @@
 angular
-	.module('myApp', ['ngBoostrapLightbox'])
+	.module('myApp', ['ngBoostrapLightbox', 'ngTouch'])
 	.controller('Ctrl', ['$scope', 'lightbox',
 		
 		function($scope, lightbox){
