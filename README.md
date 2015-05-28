@@ -114,7 +114,7 @@ fitImageInViewPort | **false** | Determine whether lightbox will use the natural
 positionFromTop | **50** px | The position of lightbox from the top of window browser
 showImageNumberLabel | **false** | Determine whether to show the image number to user. The default text shown is `Image IMAGE_NUMBER of ALBUM_LENGTH`
 alwaysShowNavOnTouchDevices | **false** | Determine whether to show `left/right` arrow to user on Touch devices.
-wrapAround | **false** | Determine whether to translate to the start of the album when user reaches end of album and vice versa. Set it to **true** to enable this feature.
+wrapAround | **false** | Determine whether to move to the start of the album when user reaches the end of album and vice versa. Set it to **true** to enable this feature.
 
 ##License
 
