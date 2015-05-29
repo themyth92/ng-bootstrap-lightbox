@@ -47,7 +47,7 @@ angular.module('app', ['ngBoostrapLightbox']);
 ```html
 <div ng-controller="Ctrl as Ctrl">
   <div ng-repeat="image in Ctrl.album">
-   <img ng-src="{{image.thumb}}" ng-click = "Ctrl.run($index)"/>
+   <img ng-src="{{image.thumb}}" ng-click = "Ctrl.open($index)"/>
   </div>
 </div>
 ```
@@ -86,8 +86,8 @@ angular
       caption : 'Optional caption 3'
     }]; 
     
-    this.run = function($index){
-      lightbox.run(this.album, $index, this.options);
+    this.open = function($index){
+      lightbox.open(this.album, $index, this.options);
     }
    }); 
 ```
