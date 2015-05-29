@@ -168,7 +168,11 @@
          */
         function end(){
           
-          disableKeyboardNav();
+          if(!_this.options.disableKeyboardNav){
+
+            //unbind keyboard event
+            disableKeyboardNav(); 
+          }
 
           //unbind all the event
           _this.element.$image.unbind('load');
@@ -226,7 +230,11 @@
         ======================================*/
         function onLoadSuccess(){
 
-          disableKeyboardNav();
+          if(!_this.options.disableKeyboardNav){
+
+            //unbind keyboard event during transition
+            disableKeyboardNav();  
+          }
 
           var imageHeight, imageWidth, maxImageHeight, maxImageWidth, windowHeight, windowWidth;
           
@@ -371,7 +379,11 @@
 
           updateNav();
           updateDetails();
-          enableKeyboardNav();
+
+          if(!_this.options.disableKeyboardNav){
+
+            enableKeyboardNav();
+          }
         }
 
         /*============================================

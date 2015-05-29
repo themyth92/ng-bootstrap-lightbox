@@ -22,7 +22,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 	</head>
-	<body ng-app = 'myApp'>
+	<body ng-app = 'app'>
 		
 		<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -62,9 +62,9 @@
                 <h4>4 image set</h4>
             </div>
         </div>
-        <div class = 'row  text-center' ng-controller = 'Ctrl as Ctrl'>
-        	<div ng-repeat = 'image in Ctrl.album' class = 'img-row'>
-                <img class = 'img-responsive img-frame' ng-src = '{{image.thumb}}' ng-click = 'Ctrl.kickStart($index)'/>
+        <div class = 'row text-center' ng-controller = 'Demo1 as Demo1Ctrl'>
+        	<div ng-repeat = 'image in Demo1Ctrl.album' class = 'img-row'>
+                <img class = 'img-responsive img-frame' ng-src = '{{image.thumb}}' ng-click = 'Demo1Ctrl.open($index)'/>
             </div>
         </div>
       </div>

@@ -1,9 +1,12 @@
 (function(angular){
 
-  //Todo : Add ngTouch
+  //TODO : Add ngTouch - done
   //     : Set text default for image label
-  //     : Dynamic update src/details, delete src, add new src/details
+  //     : Dynamic update src/details, add new src/details
   //     : Promise when close lightbox
+  //     : Disable keyboard nav - done 
+  //     : Disable ngTouch on specific cases
+  //     : Close lightbox dynamically
   'use strict';
 
   angular
@@ -22,6 +25,7 @@
         showImageNumberLabel        : false,
         alwaysShowNavOnTouchDevices : false,
         wrapAround                  : false,
+        disableKeyboardNav          : false,
 
         //should not change it for now
         templateUrl                 : 'src/partials/modal.tpl.html',

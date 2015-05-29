@@ -1,41 +1,113 @@
 angular
-	.module('myApp', ['ngBoostrapLightbox', 'ngTouch'])
-	.controller('Ctrl', ['$scope', 'lightbox',
-		
-		function($scope, lightbox){
+  .module('app', ['ngBoostrapLightbox', 'ngTouch'])
+  .controller('Demo1', ['lightbox', function(lightbox){
 
-			var _this = this;
-			var options            = {
+      var _this = this;
+
+      _this.album = [];
+      _this.options = {
+
+        //default options
         fadeDuration                 : 0.7,
         resizeDuration               : 0.5,
-			 	fitImageInViewPort 	 			   : true,
-				positionFromTop      			   : 20,  
-			  showImageNumberLabel 			   : true,
-			  alwaysShowNavOnTouchDevices  : false,
-			  wrapAround                   : false
-			};
+        fitImageInViewPort           : false,
+        positionFromTop              : 50,  
+        showImageNumberLabel         : false,
+        alwaysShowNavOnTouchDevices  : false,
+        wrapAround                   : false,
+        disableKeyboardNav           : false
+      };
 
-			function init(){
+      for(var i = 1 ; i <= 4 ; i++){
+          
+        //src attr is a MUST, caption and thumb is optional
+        var img = {
 
-				//init the list of image on the index page
-				for(var i = 1 ; i <= 4 ; i++){
-					
-					//these 3 attributes is a MUST have
-					var img = {
-						src 		: 'www/img/image' + i + '.jpg',
-						caption  	: 'Image ' + i + ' caption here',
-						thumb       : 'www/img/image' + i + '-thumb.jpg' 
-					};
+          src       : 'www/img/image' + i + '.jpg',
+          caption   : 'Image ' + i + ' caption here',
+          thumb     : 'www/img/image' + i + '-thumb.jpg' 
+        };
 
-					_this.album.push(img);	
-				}
-			}
+        _this.album.push(img);  
+      }
 
-			_this.album  			= [];
-			init();
+      _this.open = function($index){
 
-			_this.kickStart = function($index){
+        lightbox.open(_this.album, $index, _this.options);
+      }
+  }])
+  .controller('Demo2', ['$timeout', 'lightbox', function($timeout, lightbox){
 
-				lightbox.open(_this.album, $index, options);
-			}
-}]);
+    //dynamic content
+    var _this  = this;
+    _this.album = [];
+
+    _this.options = {
+
+      fitImageInViewPort           : true,
+      positionFromTop              : 20,  
+    };
+
+    var captionList = [
+      'Image caption changed. Image content will be changed after 3 seconds ...',
+      'Image content changed. New image will be added after 3 seconds ...',
+      'Image added. Navigate right or left nav bar to see new image. Another new image will be added after 5 seconds ...',
+      'Image added. Finish the dynamic demo'
+    ];
+
+    var srcList = [
+      'www/img/image1.jpg',
+      'www/img/image2.jpg',
+      'www/img/image3.jpg',
+      'www/img/image4.jpg',
+    ];
+
+    var thumbList = [
+      'www/img/image1-thumb.jpg',
+      'www/img/image2-thumb.jpg',
+      'www/img/image3-thumb.jpg',
+      'www/img/image4-thumb.jpg',
+    ]
+
+    _this.album.push({
+      src       : 'www/img/image1.jpg',
+      caption   : 'Image caption will be changed after 3 seconds'
+    });
+
+    _this.open = function($index){
+
+      lightbox.open(_this.album, $index, _this.options);
+    }
+
+    //demo using $timeout
+    var steps = 0;
+    var timeout = null;
+
+    function timeoutWrapper(time){
+
+      $timeout(function(){
+
+        if(steps < 3){
+          
+          _this.album[0].caption = captionList[steps];
+          _this.album[0].src     = srcList[steps];
+          steps ++;
+
+          timeoutWrapper(3000);  
+        }
+        else
+          if(steps < 5){
+            
+            _this.album.push({
+              src : srcList[steps],
+              caption : captionList[steps],
+              thumb : thumbList[steps]
+            })
+
+            steps ++;
+            timeoutWrapper(5000);  
+          }
+      }, time);
+    }
+
+  }]);
