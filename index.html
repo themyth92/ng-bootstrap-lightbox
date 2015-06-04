@@ -53,87 +53,97 @@
     	<div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>DEMO</h2>
-                <hr class="star-primary">
+              <h2>DEMO</h2>
+              <hr class="star-primary">
             </div>
         </div>
         <div class="row" style = 'margin-top:20px'>
         	<div class="col-lg-12 text-center">
-                <h4>4 image set</h4>
-            </div>
+            <h4>4 image set</h4>
+          </div>
         </div>
         <div class = 'row text-center' ng-controller = 'Demo1 as Demo1Ctrl'>
         	<div ng-repeat = 'image in Demo1Ctrl.album' class = 'img-row'>
-                <img class = 'img-responsive img-frame' ng-src = '{{image.thumb}}' ng-click = 'Demo1Ctrl.open($index)'/>
+            <img class = 'img-responsive img-frame' ng-src = '{{image.thumb}}' ng-click = 'Demo1Ctrl.open($index)'/>
+            </div>
+        </div>
+        <div class="row" style = 'margin-top:20px'>
+          <div class="col-lg-12 text-center">
+                <h4>Dynamic content</h4>
+            </div>
+        </div>
+        <div class = 'row text-center' ng-controller = 'Demo2 as Demo2Ctrl'>
+          <div ng-repeat = 'image in Demo2Ctrl.album' class = 'img-row'>
+              <img class = 'img-responsive img-frame' ng-src = '{{image.thumb}}' ng-click = 'Demo2Ctrl.open($index)'/>
             </div>
         </div>
       </div>
     </section>
 
     <section class="success" id="howto">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>How to use</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Feel free to submit a <a href = 'https://github.com/themyth92/ng-bootstrap-lightbox/pulls'>pull request</a> or <a href = 'https://github.com/themyth92/ng-bootstrap-lightbox/issues/new'>create an issue</a> on Github</p>
-                </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="https://github.com/themyth92/ng-bootstrap-lightbox#readme" class="btn btn-lg btn-outline">
-                        <i class="fa fa-book"></i> Readme
-                    </a>
-                </div>
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2>How to use</h2>
+            <hr class="star-light">
+          </div>
         </div>
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <p>Feel free to submit a <a href = 'https://github.com/themyth92/ng-bootstrap-lightbox/pulls'>pull request</a> or <a href = 'https://github.com/themyth92/ng-bootstrap-lightbox/issues/new'>create an issue</a> on Github</p>
+          </div>
+          <div class="col-lg-8 col-lg-offset-2 text-center">
+            <a href="https://github.com/themyth92/ng-bootstrap-lightbox#readme" class="btn btn-lg btn-outline">
+                <i class="fa fa-book"></i> Readme
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Contact Me</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row text-center">
-            	<ul class="list-inline" style = 'padding-top:20px'>
-							  <li><a href = 'https://github.com/themyth92' title = 'github'><span class = 'fa fa-github fa-4x'></span></a></li>
-							  <li><a href = 'http://stackoverflow.com/users/2412204/themyth92' title = 'stackoverflow'><span class = 'fa fa-4x fa-stack-overflow'></span></a></li>
-							</ul>
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+              <h2>Contact Me</h2>
+              <hr class="star-primary">
+          </div>
         </div>
+        <div class="row text-center">
+        	<ul class="list-inline" style = 'padding-top:20px'>
+					  <li><a href = 'https://github.com/themyth92' title = 'github'><span class = 'fa fa-github fa-4x'></span></a></li>
+					  <li><a href = 'http://stackoverflow.com/users/2412204/themyth92' title = 'stackoverflow'><span class = 'fa fa-4x fa-stack-overflow'></span></a></li>
+					</ul>
+        </div>
+      </div>
     </section>
 
         <!-- Footer -->
     <footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>Singapore</p>
-                    </div>
-                    <div class="footer-col col-md-4">
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <p>The page generated using <a href="http://startbootstrap.com/template-overviews/freelancer/">Freelancer</a> template.</p>
-                    </div>
-                </div>
+      <div class="footer-above">
+        <div class="container">
+          <div class="row">
+            <div class="footer-col col-md-4">
+              <h3>Location</h3>
+              <p>Singapore</p>
             </div>
-        </div>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        Copyright &copy; themyth92 2015
-                    </div>
-                </div>
+            <div class="footer-col col-md-4">
             </div>
+            <div class="footer-col col-md-4">
+              <p>The page generated using <a href="http://startbootstrap.com/template-overviews/freelancer/">Freelancer</a> template.</p>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="footer-below">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+                Copyright &copy; themyth92 2015
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
 
 		<!-- FORK -->

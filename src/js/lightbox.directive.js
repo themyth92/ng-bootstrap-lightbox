@@ -32,8 +32,9 @@
                         '</div>'+
                         '<div class="lb-dataContainer" ng-show = "!ui.showReloader">'+
                           '<div class="lb-data">'+
-                            '<div class="lb-details"><span class="lb-caption" style="display: inline;" ng-bind = "content.caption"></span>'+
-                                              '<span class="lb-number" ng-bind = "content.pageNumber"></span>'+
+                            '<div class="lb-details">' + 
+                              '<span class="lb-caption" style="display: inline;" ng-bind = "content.caption"></span>'+
+                              '<span class="lb-number" ng-bind = "content.pageNumber"></span>'+
                             '</div>'+
                             '<div class="lb-closeContainer">'+
                               '<a class="lb-close" ng-click="close($event)"></a>'+

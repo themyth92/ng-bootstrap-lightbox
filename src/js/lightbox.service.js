@@ -1,12 +1,18 @@
 (function(angular){
 
   //TODO : Add ngTouch - done
+  //     : Lightbox content can be changed
   //     : Set text default for image label
   //     : Dynamic update src/details, add new src/details
-  //     : Promise when close lightbox
+  //     : Promise when close lightbox - done
   //     : Disable keyboard nav - done 
   //     : Disable ngTouch on specific cases
   //     : Close lightbox dynamically
+  //     : Change modal controller
+  //     : Change modal template url
+  //     : Add service methods : getCurrentImage user navigate to
+  //     :                     : programatically navigate to some other images
+  //     :                     : Add event if user navigate to other images
   'use strict';
 
   angular
@@ -28,7 +34,7 @@
         disableKeyboardNav          : false,
 
         //should not change it for now
-        templateUrl                 : 'src/partials/modal.tpl.html',
+        modalTemplateUrl            : 'src/partials/modal.tpl.html',
         windowTemplateUrl           : 'src/partials/window.tpl.html'
       },
 
@@ -41,6 +47,11 @@
         //store the modal instance so later we can remove the modal
         //from bootstrap directive
         $scope.modalInstance     = $modalInstance;
+        $scope.$watch(function(){
+          return $scope.album;
+        }, function(){
+          console.log($scope.album);
+        })
       }
     };
 
@@ -73,9 +84,9 @@
           //open bootstrap model
           _this._lightbox.modalInstance = $modal.open({
 
-            templateUrl             : _this._lightbox.options.templateUrl,
+            templateUrl             : _this._lightbox.options.modalTemplateUrl,
             
-            //need to fix bootstrap templateUrl to make lightbox
+            //need to fix bootstrap windowTemplateUrl to make lightbox
             //modal at the center of the page
             windowTemplateUrl       : _this._lightbox.options.windowTemplateUrl,
             controller              : ['$scope', '$modalInstance', 'album', 'currentImageIndex', 'options',
@@ -92,6 +103,8 @@
               }
             }
           });
+
+          return _this._lightbox.modalInstance;
         },
       };
     }];

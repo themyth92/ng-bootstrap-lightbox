@@ -37,7 +37,7 @@ angular
       }
   }])
   .controller('Demo2', ['$timeout', 'lightbox', function($timeout, lightbox){
-
+   
     //dynamic content
     var _this  = this;
     _this.album = [];
@@ -71,38 +71,48 @@ angular
 
     _this.album.push({
       src       : 'www/img/image1.jpg',
-      caption   : 'Image caption will be changed after 3 seconds'
+      caption   : 'Image caption will be changed after 3 seconds',
+      thumb     : 'www/img/image1-thumb.jpg',
     });
 
     _this.open = function($index){
 
-      lightbox.open(_this.album, $index, _this.options);
+      lightbox.open(_this.album, $index, _this.options).result.then(function(){
+        
+        if(promise){
+
+          $timeout.cancel(promise);
+        }
+      });
+
+      timeoutWrapper(3000);
     }
 
     //demo using $timeout
     var steps = 0;
-    var timeout = null;
+    var promise = null;
 
     function timeoutWrapper(time){
 
-      $timeout(function(){
+      promise = $timeout(function(){
 
-        if(steps < 3){
+        if(steps < 2){
           
           _this.album[0].caption = captionList[steps];
           _this.album[0].src     = srcList[steps];
+          
           steps ++;
 
           timeoutWrapper(3000);  
         }
         else
-          if(steps < 5){
+          if(steps < 4){
             
             _this.album.push({
-              src : srcList[steps],
+              src     : srcList[steps],
               caption : captionList[steps],
-              thumb : thumbList[steps]
-            })
+              thumb   : thumbList[steps]
+            });
 
             steps ++;
             timeoutWrapper(5000);  
