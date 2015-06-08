@@ -16,7 +16,7 @@
   'use strict';
 
   angular
-  .module('ngBoostrapLightbox')
+  .module('ngBootstrapLightbox')
   .provider('lightbox', function LightboxProvider(){
 
     var _this               = this;

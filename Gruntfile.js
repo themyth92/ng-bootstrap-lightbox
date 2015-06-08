@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 		  	dist: {
 	      		options:    {
 			      	htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true },
-			      	module : 'ngBoostrapLightbox'
+			      	module : 'ngBootstrapLightbox'
 			    },
 			    src:      'src/partials/**.html',
 	      		dest:     'dist/temp/templates.js',

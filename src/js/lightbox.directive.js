@@ -1,7 +1,7 @@
 (function(angular){
 
   angular
-    .module('ngBoostrapLightbox')
+    .module('ngBootstrapLightbox')
     .directive('lightbox',  ['$document', 
                              '$window',
                              '$timeout',

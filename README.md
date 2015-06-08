@@ -34,10 +34,10 @@ This angular module follows [Lightbox2](http://lokeshdhakar.com/projects/lightbo
  <script src="dist/js/lightbox.min.js"></script>
  ```
  
-4. Inject `ngBoostrapLightbox` as module dependancy to your current `app`
+4. Inject `ngBootstrapLightbox` as module dependancy to your current `app`
 
  ```js
-angular.module('app', ['ngBoostrapLightbox']);
+angular.module('app', ['ngBootstrapLightbox']);
  ```
 
 ## Basic example : 
@@ -131,7 +131,7 @@ Added `ngTouch` support.
  angular.module('app', ['ngBootstrapLightbox', 'ngTouch']);
  ```
 
-You can now swipe left or right on your mobile devices. 
+You can now swipe left or right of your image on your mobile devices. 
 
 ##License
 

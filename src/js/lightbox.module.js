@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('ngBoostrapLightbox', [
+		.module('ngBootstrapLightbox', [
 			'ui.bootstrap'
 		]);
 })(angular);

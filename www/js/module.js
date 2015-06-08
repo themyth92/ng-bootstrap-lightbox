@@ -1,5 +1,5 @@
 angular
-  .module('app', ['ngBoostrapLightbox', 'ngTouch'])
+  .module('app', ['ngBootstrapLightbox', 'ngTouch'])
   .controller('Demo1', ['lightbox', function(lightbox){
 
       var _this = this;
