@@ -1,25 +1,33 @@
 {
-  "name": "ImageSlider",
-  "version": "0.0.1",
+  "name": "ng-bootstrap-lightbox",
+  "version": "1.0.0",
   "authors": [
     "themyth92 <themyth92@gmail.com>"
   ],
-  "description": "The image slider directive using purely angularjs and css3 animation. The project based on Lightbox2 by Lokesh Dhakar.",
-  "moduleType": [
-    "node"
+  "main": [
+    "dist/js/lightbox.min.js",
+    "dist/css/lightbox.min.css"
   ],
+  "description": "The image slider directive using purely angularjs and css3 animation. The project based on Lightbox2 by Lokesh Dhakar.",
+  "moduleType": [],
   "keywords": [
-    "ImageSlider",
-    "directive",
-    "lightbox2"
+    "lightbox2",
+    "angularjs",
+    "directives",
+    "lightbox2",
+    "angular",
+    "angular",
+    "directives"
   ],
   "license": "MIT",
-  "homepage": "themyth92.com/projects/imageslider.html",
+  "homepage": "https://github.com/themyth92/ng-bootstrap-lightbox",
   "dependencies": {
-    "angular": "~1.2.20",
-    "angular-touch": "~1.2.20",
-    "ngDialog": "~0.2.3",
-    "angular-bootstrap": "~0.11.0"
+    "angular": "^1.4.0",
+    "angular-bootstrap": "^0.14.3"
   },
-  "ignore": {}
+  "ignore": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/themyth92/ng-bootstrap-lightbox"
+  }
 }
