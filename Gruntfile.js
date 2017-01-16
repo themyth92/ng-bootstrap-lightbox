@@ -2,11 +2,6 @@
 module.exports = function ex(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    karma: {
-      unit: {
-        configFile: 'test/karma.conf.js'
-      }
-    },
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -94,7 +89,6 @@ module.exports = function ex(grunt) {
   });
 
   require('load-grunt-tasks')(grunt);
-  grunt.registerTask('test', ['jshint']);
   grunt.registerTask('dist', ['clean:dist', 'ngtemplates', 'concat', 'copy:dist', 'uglify',
     'clean:temp', 'copy:assets', 'cssmin']);
 };
