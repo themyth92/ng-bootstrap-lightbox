@@ -1,6 +1,6 @@
 {
   "name": "ng-bootstrap-lightbox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The image slider directive based on lightbox2 created by Lokesh Dhakar (http://lokeshdhakar.com/projects/lightbox2/) for angularjs app. This directive does not use jQuery but  use css3 animation in replacement.",
   "main": "Gruntfile.js",
   "directories": {
