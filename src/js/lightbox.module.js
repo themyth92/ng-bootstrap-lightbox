@@ -1,8 +1,5 @@
-(function(angular){
+(function wrapper(angular){
 	'use strict';
-
 	angular
-		.module('ngBootstrapLightbox', [
-			'ui.bootstrap'
-		]);
+    .module('ngBootstrapLightbox', ['ui.bootstrap']);
 })(angular);
