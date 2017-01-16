@@ -1,5 +1,5 @@
 (function wrapper(angular){
-	'use strict';
-	angular
+  'use strict';
+  angular
     .module('ngBootstrapLightbox', ['ui.bootstrap']);
 })(angular);

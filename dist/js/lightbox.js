@@ -1,6 +1,6 @@
-/*! ng-bootstrap-lightbox - v1.0.0 - 2017-01-16 */(function wrapper(angular){
-	'use strict';
-	angular
+/*! ng-bootstrap-lightbox - v1.0.1 - 2017-01-16 */(function wrapper(angular){
+  'use strict';
+  angular
     .module('ngBootstrapLightbox', ['ui.bootstrap']);
 })(angular);;(function wrapper(angular) {
   'use strict';
