@@ -5,8 +5,8 @@
     "themyth92 <themyth92@gmail.com>"
   ],
   "main": [
-    "dist/js/lightbox.min.js",
-    "dist/css/lightbox.min.css"
+    "dist/js/lightbox.js",
+    "dist/css/lightbox.css"
   ],
   "description": "The image slider directive using purely angularjs and css3 animation. The project based on Lightbox2 by Lokesh Dhakar.",
   "moduleType": [],

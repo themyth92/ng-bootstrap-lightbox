@@ -54,12 +54,25 @@ module.exports = function ex(grunt) {
       dist: ['dist/']
     },
     copy: {
-      dist: {
+      assets: {
         files: [{
           expand: true,
           src: '*',
           dest: 'dist/img/',
           cwd: 'src/img/'
+        }]
+      },
+      dist: {
+        files: [{
+          expand: true,
+          src: 'lightbox.js',
+          dest: 'dist/js/',
+          cwd: 'dist/temp/'
+        }, {
+          expand: true,
+          src: 'lightbox.css',
+          dest: 'dist/css/',
+          cwd: 'src/css/'
         }]
       }
     },
@@ -82,5 +95,6 @@ module.exports = function ex(grunt) {
 
   require('load-grunt-tasks')(grunt);
   grunt.registerTask('test', ['jshint']);
-  grunt.registerTask('dist', ['clean:dist', 'ngtemplates', 'concat', 'uglify', 'clean:temp', 'copy', 'cssmin']);
+  grunt.registerTask('dist', ['clean:dist', 'ngtemplates', 'concat', 'copy:dist', 'uglify',
+    'clean:temp', 'copy:assets', 'cssmin']);
 };

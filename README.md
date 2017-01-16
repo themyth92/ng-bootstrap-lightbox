@@ -16,8 +16,8 @@ This angular module follows [Lightbox2](http://lokeshdhakar.com/projects/lightbo
  - [AngularUI Bootstrap Modal (>= 0.14.3)](http://angular-ui.github.io/bootstrap/#/modal)
 
 1. Installation :
-
- - [Download and extract](https://github.com/themyth92/ng-bootstrap-lightbox/archive/master.zip)  
+ - [Download and extract](https://github.com/themyth92/ng-bootstrap-lightbox/archive/master.zip)
+ - `bower install ng-bootstrap-lightbox`
 
 2. Include stylesheet in your app
 
