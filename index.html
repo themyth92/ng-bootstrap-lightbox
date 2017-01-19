@@ -5,15 +5,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     	<link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
     <link href="www/css/freelancer.css" rel="stylesheet" type="text/css">
 		<!--[if lt IE 9]>
 		  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
 		<![endif]-->
 		<link href ="www/css/style.css" rel="stylesheet" type="text/css">
-		<link href ="dist/css/lightbox.min.css" rel="stylesheet" type="text/css">
+		<link href ="src/css/lightbox.css" rel="stylesheet" type="text/css">
   	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn"t work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -21,19 +21,19 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 	</head>
-	<body ng-app="app">
+	<body>
 		
 		<!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <!--<nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
   			<div class="navbar-header page-scroll">
             <a class="navbar-brand">Themyth92</a>
         </div>
       </div>
-    </nav>
+    </nav>-->
 		
 		<!-- Header -->
-    <header>
+    <!--<header>
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-    </header>
+    </header>-->
 
     <section id="#demo">
     	<div class="container">
@@ -61,15 +61,16 @@
             <h4>4 image set</h4>
           </div>
         </div>
-        <div class="row text-center" ng-controller="Demo1 as Demo1Ctrl">
+        <demo></demo>
+        <!--<div class="row text-center" ng-controller="Demo1 as Demo1Ctrl">
         	<div ng-repeat="image in Demo1Ctrl.album" class="img-row">
             <img class="img-responsive img-frame" ng-src="{{image.thumb}}" ng-click="Demo1Ctrl.open($index)"/>
             </div>
-        </div>
+        </div>-->
       </div>
     </section>
 
-    <section class="success" id="howto">
+    <!--<section class="success" id="howto">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
@@ -106,10 +107,10 @@
 					</ul>
         </div>
       </div>
-    </section>
+    </section>-->
 
     <!-- Footer -->
-    <footer class="text-center">
+    <!--<footer class="text-center">
       <div class="footer-above">
         <div class="container">
           <div class="row">
@@ -134,25 +135,25 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer>-->
 
 		<!-- FORK -->
-		<div class="github-fork-ribbon-wrapper right-bottom">
+		<!--<div class="github-fork-ribbon-wrapper right-bottom">
       <div class="github-fork-ribbon">
         <a href="https://github.com/themyth92/ng-bootstrap-lightbox">Fork me on GitHub</a>
       </div>
-    </div>
-
-	  <script src="www/js/classie.js"></script>
-		<script src="www/js/cbpAnimatedHeader.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-touch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
-	  <script src="dist/js/lightbox.min.js"></script>
-    <!--<script src="src/js/lightbox.module.js"></script>
-    <script src="src/js/lightbox.directive.js"></script>
-    <script src="src/js/lightbox.service.js"></script>-->
-		<script src="www/js/module.js"></script>
+    </div>-->
+    <!-- Polyfill -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/typescript/lib/typescript.js"></script>
+    <script src="www/js/systemjs.config.js"></script>
+    <script>
+      SystemJS.import('main').catch(function Error(err) {
+        console.log(err);
+      });
+    </script>
 		<!-- / FORK -->
 	</body>
 </html>
