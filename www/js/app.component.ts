@@ -5,12 +5,12 @@ import { Lightbox } from 'lightbox';
 @Component({
   selector: 'demo',
   template: `
-    <template ngbModalContainer></template>
     <div class="row text-center">
       <div *ngFor="let image of albums; let i=index" class="img-row">
         <img class="img-responsive img-frame" [src]="image.thumb" (click)="open(i)"/>
       </div>
     </div>
+    <lightbox></lightbox>
   `
 })
 export class AppComponent {
