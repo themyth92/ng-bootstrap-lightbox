@@ -4,6 +4,10 @@ body:after {
   display: none;
 }
 
+body.lb-disable-scrolling {
+  overflow: hidden;
+}
+
 .lightboxOverlay {
   position: absolute;
   top: 0;
@@ -29,6 +33,7 @@ body:after {
   display: block;
   height: auto;
   max-width: inherit;
+  border: 4px solid white;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -176,6 +181,7 @@ body:after {
   font-size: 13px;
   font-weight: bold;
   line-height: 1em;
+  display: inline;
 }
 
 .lb-data .lb-number {
@@ -207,6 +213,16 @@ body:after {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
+
+/**
+ * Override model
+ */
+.lb-modal-window .modal-dialog {
+  margin: 0 auto;
+  max-width: none;
+}
+
+
 /* animation */
 @keyframes fadeIn{    
   0% {opacity: 0;}
@@ -224,8 +240,6 @@ body:after {
 }
 
 .animation{
-  /*  -webkit-animation-duration: 1s;
-    animation-duration: 1s;*/
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }

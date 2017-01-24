@@ -15,15 +15,15 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   template: `
-  <div id="lightbox" class="lightbox" #lightbox>
+  <div id="lightbox" class="lightbox" (click)="close($event)" #lightbox>
     <div class="lb-outerContainer transition" #outerContainer>
       <div class="lb-container" #container>
         <img class="lb-image" [src]="album[currentImageIndex].src" class="lb-image animation fadeIn" [hidden]="_ui.showReloader" #image>
         <div class="lb-nav" [hidden]="!_ui.showArrowNav" #navArrow>
-          <a class="lb-prev" [hidden]="!_ui.showLeftArrow" href="" #leftArrow (click)="prevImage()"></a>
-          <a class="lb-next"[hidden]="!_ui.showRightArrow" href="" #rightArrow (click)="nextImage()"></a>
+          <a class="lb-prev" [hidden]="!_ui.showLeftArrow" (click)="prevImage()" #leftArrow></a>
+          <a class="lb-next"[hidden]="!_ui.showRightArrow" (click)="nextImage()" #rightArrow></a>
         </div>
-        <div class="lb-loader" [hidden]="!_ui.showReloader" (click)="close()">
+        <div class="lb-loader" [hidden]="!_ui.showReloader" (click)="close($event)">
           <a class="lb-cancel"></a>
         </div>
       </div>
@@ -31,11 +31,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     <div class="lb-dataContainer" [hidden]="_ui.showReloader" #dataContainer>
       <div class="lb-data">
         <div class="lb-details">
-          <span class="lb-caption" style="display: inline;"></span>
-          <span class="lb-number"></span>
+          <span class="lb-caption" style="display: inline;" [hidden]="!_ui.showCaption">{{ album[currentImageIndex].caption }}</span>
+          <span class="lb-number" [hidden]="!_ui.showPageNumber">{{ _content.pageNumber }}</span>
         </div>
         <div class="lb-closeContainer">
-          <a class="lb-close" (click)="close()"></a>
+          <a class="lb-close" (click)="close($event)"></a>
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
       // control the appear of the reloader
       // false: image has loaded completely and ready to be shown
       // true: image is still loading
-      showReloader: false,
+      showReloader: true,
 
       // control the appear of the nav arrow
       // the arrowNav is the parent of both left and right arrow
@@ -89,14 +89,8 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
 
       // control whether to show the
       // page number or not
-      showPageNumber: false
-    };
-
-    this._cssValue = {
-      containerTopPadding: 5,
-      containerRightPadding: 5,
-      containerBottomPadding: 5,
-      containerLeftPadding: 5
+      showPageNumber: false,
+      showCaption: false,
     };
 
     this._content = {
@@ -106,11 +100,20 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
     this._event = {};
   }
 
-  ngOnChanges(changes) {
-    console.log('go here');
-  }
-
   ngAfterViewInit() {
+    // need to init css value here, after the view ready
+    // actually these values are always 0
+    this._cssValue = {
+      containerTopPadding: parseInt(this._getCssStyleValue(this._containerElem, 'padding-top'), 10),
+      containerRightPadding: parseInt(this._getCssStyleValue(this._containerElem, 'padding-right'), 10),
+      containerBottomPadding: parseInt(this._getCssStyleValue(this._containerElem, 'padding-bottom'), 10),
+      containerLeftPadding: parseInt(this._getCssStyleValue(this._containerElem, 'padding-left'), 10),
+      imageBorderWidthTop: parseInt(this._getCssStyleValue(this._imageElem, 'border-top-width'), 10),
+      imageBorderWidthBottom: parseInt(this._getCssStyleValue(this._imageElem, 'border-bottom-width'), 10),
+      imageBorderWidthLeft: parseInt(this._getCssStyleValue(this._imageElem, 'border-left-width'), 10),
+      imageBorderWidthRight: parseInt(this._getCssStyleValue(this._imageElem, 'border-right-width'), 10),
+    };
+
     if (this._validateInputData()) {
       this._prepareComponent();
       this._registerImageLoadingEvent();
@@ -121,8 +124,28 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
     this._end();
   }
 
-  close() {
-    this._activeModalRef.close();
+  close($event: any) {
+    if ($event.target.classList.contains('lightbox') ||
+      $event.target.classList.contains('lb-loader') ||
+      $event.target.classList.contains('lb-close')) {
+      this._activeModalRef.close();
+    }
+  }
+
+  nextImage() {
+    if (this.currentImageIndex === this.album.length - 1) {
+      this._changeImage(0);
+    } else {
+      this._changeImage(this.currentImageIndex + 1);
+    }
+  }
+
+  prevImage() {
+    if (this.currentImageIndex === 0) {
+      this._changeImage(this.album.length - 1);
+    } else {
+      this._changeImage(this.currentImageIndex - 1);
+    }
   }
 
   private _validateInputData() {
@@ -154,14 +177,10 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
   }
 
   private _registerImageLoadingEvent() {
-    // show reloader
-    this._hideImage();
-
     // start to register the event and
     // be ready for callback
     this._event.load = this._rendererRef.listen(this._imageElem.nativeElement, 'load', () => {
-      console.log('success');
-      //this._onLoadImageSuccess();
+      this._onLoadImageSuccess();
     });
   }
 
@@ -174,30 +193,34 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
       this._disableKeyboardNav();
     }
 
-    const imageHeight;
-    const imageWidth;
-    const maxImageHeight;
-    const maxImageWidth;
-    const windowHeight;
-    const windowWidth;
+    let imageHeight;
+    let imageWidth;
+    let maxImageHeight;
+    let maxImageWidth;
+    let windowHeight;
+    let windowWidth;
+    let naturalImageWidth;
+    let naturalImageHeight;
 
     // set default width and height of image to be its natural
-    imageWidth = this._imageElem.nativeElement.naturalWidth;
-    imageHeight = this._imageElem.nativeElement.naturalHeight;
+    imageWidth = naturalImageWidth = this._imageElem.nativeElement.naturalWidth;
+    imageHeight = naturalImageHeight = this._imageElem.nativeElement.naturalHeight;
     if (this.options.fitImageInViewPort) {
       windowWidth = this._windowRef.innerWidth;
       windowHeight = this._windowRef.innerHeight;
       maxImageWidth = windowWidth - this._cssValue.containerLeftPadding -
-        this._cssValue.containerRightPadding - 20;
-      maxImageHeight  = windowHeight - this._cssValue.containerTopPadding -
-        this._cssValue.containerTopPadding - 120;
-      if (imageWidth > maxImageWidth || imageHeight > maxImageHeight) {
-        if ((imageWidth / maxImageWidth) > windowHeight / maxImageHeight)) {
-          imageWidth  = maxImageWidth;
-          imageHeight = parseInt(imageHeight / (this._imageElem.nativeElement.naturalWidth / imageWidth), 10);
+        this._cssValue.containerRightPadding - this._cssValue.imageBorderWidthLeft -
+        this._cssValue.imageBorderWidthRight - 20;
+      maxImageHeight = windowHeight - this._cssValue.containerTopPadding -
+        this._cssValue.containerTopPadding - this._cssValue.imageBorderWidthTop -
+        this._cssValue.imageBorderWidthBottom - 120;
+      if (naturalImageWidth > maxImageWidth || naturalImageHeight > maxImageHeight) {
+        if ((naturalImageWidth / maxImageWidth) > (naturalImageHeight / maxImageHeight)) {
+          imageWidth = maxImageWidth;
+          imageHeight = parseInt(naturalImageHeight / (naturalImageWidth / imageWidth), 10);
         } else {
           imageHeight = maxImageHeight;
-          imageWidth = parseInt(imageWidth / (this._imageElem.nativeElement.naturalHeight / imageHeight), 10);
+          imageWidth = parseInt(naturalImageWidth / (naturalImageHeight / imageHeight), 10);
         }
       }
 
@@ -219,8 +242,14 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
       this._rendererRef.setElementStyle(this._outerContainerElem.nativeElement, 'height', `${newHeight}px`);
 
       // bind resize event to outer container
-      this._event.transitionEvent = this._rendererRef.listen(this._outerContainerElem.nativeElement,
+      /*this._event.transition = this._rendererRef.listen(this._outerContainerElem.nativeElement,
         'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', event => {
+          if (event.target === event.currentTarget) {
+            this._postResize(newWidth, newHeight);
+          }
+        });*/
+      this._event.transition = this._rendererRef.listen(this._outerContainerElem.nativeElement,
+        'transitionend', event => {
           if (event.target === event.currentTarget) {
             this._postResize(newWidth, newHeight);
           }
@@ -232,13 +261,11 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
 
   private _postResize(newWidth: number, newHeight: number) {
     // unbind resize event
-    if (this.event.transitionEvent) {
-      this._event.transitionEvent();
+    if (this._event.transition) {
+      this._event.transition();
     }
 
     this._rendererRef.setElementStyle(this._dataContainerElem.nativeElement, 'width', `${newWidth}px`);
-    this._rendererRef.setElementStyle(this._prevLinkElem.nativeElement, 'height', `${newHeight}px`);
-    this._rendererRef.setElementStyle(this._nextLink.nativeElement, 'height', `${newHeight}px`);
     this._showImage();
   }
 
@@ -265,6 +292,9 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
 
     this._rendererRef.setElementStyle(this._lightboxElem.nativeElement, 'top', `${top}px`);
     this._rendererRef.setElementStyle(this._lightboxElem.nativeElement, 'left', `${left}px`);
+    if (this.options.disableScrolling) {
+      this._rendererRef.setElementClass(this._documentRef.body, 'lb-disable-scrolling', true);
+    }
   }
 
   /**
@@ -298,9 +328,19 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
       // unbind all the event
       this._event.load();
     }
+
+    if (this.options.disableScrolling) {
+      this._rendererRef.setElementClass(this._documentRef.body, 'lb-disable-scrolling', false);
+    }
   }
 
   private _updateDetails() {
+    // update the caption
+    if (typeof this.album[this.currentImageIndex].caption !== 'undefined' &&
+      this.album[this.currentImageIndex].caption !== '') {
+      this._ui.showCaption = true;
+    }
+
     // update the page number if user choose to do so
     // does not perform numbering the page if the
     // array length in album <= 1
@@ -324,6 +364,8 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
     this._ui.showArrowNav = false;
     this._ui.showLeftArrow = false;
     this._ui.showRightArrow = false;
+    this._ui.showPageNumber = false;
+    this._ui.showCaption = false;
   }
 
   private _showImage() {
@@ -427,5 +469,11 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
         this._changeImage(0);
       }
     }
+  }
+
+  private _getCssStyleValue(elem, propertyName) {
+    return parseFloat(this._windowRef
+      .getComputedStyle(elem.nativeElement, null)
+      .getPropertyValue(propertyName));
   }
 }

@@ -15,7 +15,7 @@ import { Lightbox } from 'lightbox';
 })
 export class AppComponent {
   albums: Album[] = [];
-  options: Object;
+  options: Object = { showImageNumberLabel: true, wrapAround: true };
   constructor(private lightboxService: Lightbox) {
     for (let i = 1; i <= 4; i++) {
       const src = 'www/img/image' + i + '.jpg';

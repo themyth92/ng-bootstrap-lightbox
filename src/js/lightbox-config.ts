@@ -10,4 +10,5 @@ export class LightboxConfig {
   alwaysShowNavOnTouchDevices: boolean = false;
   wrapAround: boolean = false;
   disableKeyboardNav: boolean = false;
+  disableScrolling: boolean = false;
 }

@@ -8,7 +8,7 @@ export class Lightbox {
   constructor(private modalService: NgbModal, private _config: LightboxConfig) {}
 
   open(album: array, curIndex: number = 0, options: LightboxConfig = {}) {
-    const modalRef = this.modalService.open(LightboxContentComponent);
+    const modalRef = this.modalService.open(LightboxContentComponent, { windowClass: 'lb-modal-window' });
     const newOptions = {};
 
     modalRef.componentInstance.album = album;
