@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Album } from './album.service';
-import { Lightbox } from 'lightbox';
+import { Lightbox, LightboxConfig } from 'lightbox';
 
 @Component({
   selector: 'demo',
@@ -15,19 +14,27 @@ import { Lightbox } from 'lightbox';
 })
 export class AppComponent {
   albums: Album[] = [];
-  options: Object = { showImageNumberLabel: true, wrapAround: true };
-  constructor(private lightboxService: Lightbox) {
+  options: Object = {};
+  constructor(private _lightboxService: Lightbox, private _lightboxConfig: LightboxConfig) {
     for (let i = 1; i <= 4; i++) {
       const src = 'www/img/image' + i + '.jpg';
       const caption = 'Image ' + i + ' caption here';
       const thumb = 'www/img/image' + i + '-thumb.jpg';
-      const album =  new Album(src, caption, thumb);
+      let album = {};
 
+      album.src = src;
+      album.caption = caption;
+      album.thumb = thumb;
       this.albums.push(album);
     }
+
+    // change default config globally
+    this._lightboxConfig.wrapAround = true;
   }
 
   open(index) {
-    this.lightboxService.open(this.albums, index, this.options);
+    // additional local config
+    this.options = { showImageNumberLabel: true };
+    this._lightboxService.open(this.albums, index, this.options);
   }
 }

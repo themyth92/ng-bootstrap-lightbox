@@ -5,10 +5,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class Lightbox {
-  constructor(private modalService: NgbModal, private _config: LightboxConfig) {}
+  constructor(private _modalService: NgbModal, private _config: LightboxConfig) {}
 
   open(album: array, curIndex: number = 0, options: LightboxConfig = {}) {
-    const modalRef = this.modalService.open(LightboxContentComponent, { windowClass: 'lb-modal-window' });
+    const modalRef = this._modalService.open(LightboxContentComponent, { windowClass: 'lb-modal-window' });
     const newOptions = {};
 
     modalRef.componentInstance.album = album;

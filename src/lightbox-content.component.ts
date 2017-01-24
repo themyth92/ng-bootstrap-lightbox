@@ -31,8 +31,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     <div class="lb-dataContainer" [hidden]="_ui.showReloader" #dataContainer>
       <div class="lb-data">
         <div class="lb-details">
-          <span class="lb-caption" style="display: inline;" [hidden]="!_ui.showCaption">{{ album[currentImageIndex].caption }}</span>
-          <span class="lb-number" [hidden]="!_ui.showPageNumber">{{ _content.pageNumber }}</span>
+          <span class="lb-caption animation fadeIn" [hidden]="!_ui.showCaption" #caption>{{ album[currentImageIndex].caption }}</span>
+          <span class="lb-number animation fadeIn" [hidden]="!_ui.showPageNumber" #number>{{ _content.pageNumber }}</span>
         </div>
         <div class="lb-closeContainer">
           <a class="lb-close" (click)="close($event)"></a>
@@ -41,7 +41,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     </div>
   </div>`
 })
-export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnChanges {
+export class LightboxContentComponent implements AfterViewInit, OnDestroy {
   @Input() album;
   @Input() currentImageIndex;
   @Input() options;
@@ -54,6 +54,8 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
   @ViewChild('navArrow') _navArrowElem: ElementRef;
   @ViewChild('dataContainer') _dataContainerElem: ElementRef;
   @ViewChild('image') _imageElem: ElementRef;
+  @ViewChild('caption') _captionElem: ElementRef;
+  @ViewChild('number') _numberElem: ElementRef;
 
   private _content: object;
   private _ui: object;
@@ -242,18 +244,16 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
       this._rendererRef.setElementStyle(this._outerContainerElem.nativeElement, 'height', `${newHeight}px`);
 
       // bind resize event to outer container
-      /*this._event.transition = this._rendererRef.listen(this._outerContainerElem.nativeElement,
-        'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', event => {
-          if (event.target === event.currentTarget) {
-            this._postResize(newWidth, newHeight);
-          }
-        });*/
-      this._event.transition = this._rendererRef.listen(this._outerContainerElem.nativeElement,
-        'transitionend', event => {
-          if (event.target === event.currentTarget) {
-            this._postResize(newWidth, newHeight);
-          }
-        });
+      this._event.transitions = [];
+      ['transitionend', 'webkitTransitionEnd', 'oTransitionEnd', 'MSTransitionEnd'].forEach(eventName => {
+        this._event.transitions.push(
+          this._rendererRef.listen(this._outerContainerElem.nativeElement, eventName, event => {
+            if (event.target === event.currentTarget) {
+              this._postResize(newWidth, newHeight);
+            }
+          })
+        );
+      });
     } else {
       this._postResize(newWidth, newHeight);
     } 
@@ -261,8 +261,12 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
 
   private _postResize(newWidth: number, newHeight: number) {
     // unbind resize event
-    if (this._event.transition) {
-      this._event.transition();
+    if (Array.isArray(this._event.transitions)) {
+      this._event.transitions.forEach(eventHandler => {
+        eventHandler();
+      });
+
+      this._event.transitions = [];
     }
 
     this._rendererRef.setElementStyle(this._dataContainerElem.nativeElement, 'width', `${newWidth}px`);
@@ -292,9 +296,6 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
 
     this._rendererRef.setElementStyle(this._lightboxElem.nativeElement, 'top', `${top}px`);
     this._rendererRef.setElementStyle(this._lightboxElem.nativeElement, 'left', `${left}px`);
-    if (this.options.disableScrolling) {
-      this._rendererRef.setElementClass(this._documentRef.body, 'lb-disable-scrolling', true);
-    }
   }
 
   /**
@@ -316,6 +317,14 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
       '-webkit-animation-duration', `${fadeDuration}s`);
     this._rendererRef.setElementStyle(this._imageElem.nativeElement,
       '-animation-duration', `${fadeDuration}s`);
+    this._rendererRef.setElementStyle(this._captionElem.nativeElement,
+      '-webkit-animation-duration', `${fadeDuration}s`);
+    this._rendererRef.setElementStyle(this._captionElem.nativeElement,
+      '-animation-duration', `${fadeDuration}s`);
+    this._rendererRef.setElementStyle(this._numberElem.nativeElement,
+      '-webkit-animation-duration', `${fadeDuration}s`);
+    this._rendererRef.setElementStyle(this._numberElem.nativeElement,
+      '-animation-duration', `${fadeDuration}s`);
   }
 
   private _end() {
@@ -327,10 +336,6 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
     if (this._event.load) {
       // unbind all the event
       this._event.load();
-    }
-
-    if (this.options.disableScrolling) {
-      this._rendererRef.setElementClass(this._documentRef.body, 'lb-disable-scrolling', false);
     }
   }
 
@@ -357,6 +362,14 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
 
   private _changeImage(newIndex: number) {
     this.currentImageIndex = newIndex;
+
+    // unbind load event from image first before bind it again
+    if (this._event.load) {
+      this._event.load();
+    }
+
+    this._hideImage();
+    this._registerImageLoadingEvent();
   }
 
   private _hideImage() {
@@ -366,15 +379,6 @@ export class LightboxContentComponent implements AfterViewInit, OnDestroy, OnCha
     this._ui.showRightArrow = false;
     this._ui.showPageNumber = false;
     this._ui.showCaption = false;
-  }
-
-  private _showImage() {
-    this._ui.showReloader = false;
-    this._updateNav();
-    this._updateDetails();
-    if (!this.options.disableKeyboardNav) {
-      this._enableKeyboardNav();
-    }
   }
 
   private _updateNav() {
