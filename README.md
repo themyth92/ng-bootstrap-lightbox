@@ -6,7 +6,7 @@ This angular module follows [Lightbox2](http://lokeshdhakar.com/projects/lightbo
 
 ## Demo
 
-####[Demo](http://themyth92.com/project/ng-bootstrap-lightbox/index.html)
+#### [Demo](http://themyth92.com/project/ng-bootstrap-lightbox/index.html)
 
 ## Setup
 
@@ -42,7 +42,7 @@ angular.module('app', ['ngBootstrapLightbox']);
 
 ## Basic example : 
 
-###Markup :
+### Markup :
 
 ```html
 <div ng-controller="Ctrl as Ctrl">
@@ -52,7 +52,7 @@ angular.module('app', ['ngBootstrapLightbox']);
 </div>
 ```
 
-###Controller : 
+### Controller : 
 
 ```js
 angular
@@ -104,7 +104,7 @@ src | Required | The source image to your thumbnail that you want to with use li
 caption | Optional | Your caption corresponding with your image 
 thumb | Optional | Source of your thumbnail. You can use whatever properties your like, just to make sure that your `controller` understand that `properties`.
 
-###Lightbox options
+### Lightbox options
 
 Properties | Default | Description
 -----------|---------|------------
@@ -116,7 +116,7 @@ showImageNumberLabel | **false** | Determine whether to show the image number to
 alwaysShowNavOnTouchDevices | **false** | Determine whether to show `left/right` arrow to user on Touch devices.
 wrapAround | **false** | Determine whether to move to the start of the album when user reaches the end of album and vice versa. Set it to **true** to enable this feature.
 
-###Touch support
+### Touch support
 
 Added `ngTouch` support.
 
