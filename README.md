@@ -6,7 +6,7 @@ This angular module follows [Lightbox2](http://lokeshdhakar.com/projects/lightbo
 
 ## Demo
 
-#### [Demo](http://themyth92.com/project/ng-bootstrap-lightbox/index.html)
+#### [Demo](https://themyth92.com/project/ng-bootstrap-lightbox/index.html)
 
 ## Setup
 
